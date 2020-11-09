@@ -1,0 +1,17 @@
+﻿@model MVCTestTask.Models.Home.OrdersListViewModel
+
+@Html.HiddenFor(m => m.numOrders)
+@Html.HiddenFor(m => m.CustomerId)
+
+@foreach (var order in Model.Orders)
+{
+    <tr>
+        <td class="text-center">@order.Id</td>
+        <td>@order.OrderNum</td>
+        <td>@Html.DisplayFor(x => order.Price)</td>
+        <td class="min-td">
+            <button type="button" class="btn btn-primary" data-upd-order data-id="@order.Id">Edit</button>
+            <button type="button" class="btn btn-danger" data-del-order data-id="@order.Id">Delete</button>
+        </td>
+    </tr>
+}

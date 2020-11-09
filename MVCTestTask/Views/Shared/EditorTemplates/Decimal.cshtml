@@ -1,0 +1,28 @@
+﻿@model decimal
+
+@{
+    IFormatProvider formatProvider = new System.Globalization.CultureInfo("ru-RU");
+    ((System.Globalization.CultureInfo)formatProvider).NumberFormat.NumberDecimalSeparator = ".";
+
+    <input class="form-control" name="price" id="price" onkeyup="numberWith(this)" value="@Model.ToString("N", formatProvider)">
+}
+
+<script>
+    function numberWith(input) {
+        let formatter = new Intl.NumberFormat('ru', {
+            style: "decimal"
+            //useGrouping: true//,
+            //maximumFractionDigits: 2
+            //maximumSignificantDigits: 4
+        });
+
+        let newVal = input.value.replace(/\s/g, '');
+        newVal = newVal.replace(/,/g, '.');
+        let parts = newVal.split('.');
+
+        if (parts.length >= 1) {
+            input.value = formatter.format(parts[0]) + newVal.substr(parts[0].length);
+        }
+    }
+
+</script>
