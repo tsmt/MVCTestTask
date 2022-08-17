@@ -1,0 +1,21 @@
+﻿@model MVCTestTask.Models.Home.HomeViewModel
+
+@Html.HiddenFor(m => m.numRecords)
+
+@for (int i = 0; i < Model.Customers.Count(); i++)
+{
+    <tr>
+        <th class="text-center" scope="row">@Model.Customers[i].Id</th>
+        <td>@Model.Customers[i].Name</td>
+        <td>@Model.Customers[i].City</td>
+        <td>@Model.Customers[i].Address</td>
+        <td>@Model.Customers[i].Phone</td>
+        <td class="min-td">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerupdateModal"
+                    data-id="@Model.Customers[i].Id">
+                Edit
+            </button>
+            <button type="button" class="btn btn-danger" data-del-cust data-id="@Model.Customers[i].Id">Delete</button>
+        </td>
+    </tr>
+}

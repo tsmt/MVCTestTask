@@ -1,0 +1,106 @@
+﻿@model  MVCTestTask.Models.Home.HomeViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <header class="header">
+        <h1>MVC Test task</h1>
+        <h2>Customers List</h2>
+    </header>
+</div>
+
+<div class="col text-right mb-2">
+    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#customerModal">Add</button>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover table-bordered" id="custtable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="custtbody">
+                    @Html.HiddenFor(m => m.numRecords)
+                    @for (int i = 0; i < Model.Customers.Count; i++)
+                    {
+                        <tr>
+                            <th class="text-center" scope="row">@Model.Customers[i].Id</th>
+                            <td>@Model.Customers[i].Name</td>
+                            <td>@Model.Customers[i].City</td>
+                            <td>@Model.Customers[i].Address</td>
+                            <td>@Model.Customers[i].Phone</td>
+                            <td class="min-td">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerupdateModal"
+                                        data-id="@Model.Customers[i].Id">
+                                    Edit
+                                </button>
+                                <button type="button" class="btn btn-danger" data-del-cust data-id="@Model.Customers[i].Id">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <nav aria-label="Page navigation">
+        <ul class="pagination pagination-dark" id="customers_page_nav">
+        </ul>
+    </nav>
+</div>
+
+<div class="modal fade bd-customer-modal" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="customerModalLabel">Add Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="mbody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" id="saveCustomer" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-customer-modal" id="customerupdateModal" tabindex="-1" role="dialog" aria-labelledby="customerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updatetitle">Update Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="mupdatebody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="updateCustomer" class="btn btn-primary">Save changes</button>
+                <button type="button" id="updateOrder" class="btn btn-primary" hidden>Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="root" value="@Url.Content("~/")" />
+
+@section scripts {
+}
