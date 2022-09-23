@@ -16,4 +16,4 @@
 ----
 
 Connection String "DBConnection" в web.config
-Выполнить команду в Package Manager Console выполнить команду update-database
+Выполнить команду в Package Manager Console update-database
